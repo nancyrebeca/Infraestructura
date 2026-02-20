@@ -407,7 +407,7 @@
               <g class="node">
                 <rect x="360" y="165" width="260" height="90" rx="16" fill="#f1f5f9" stroke="#94a3b8" stroke-opacity=".55" />
                 <text x="490" y="205" text-anchor="middle" font-weight="900" fill="#0f172a">FctProductos</text>
-                <text x="490" y="228" text-anchor="middle" font-size="12" fill="#334155">Producto (COD_PRODUCTO)</text>
+                <text x="490" y="228" text-anchor="middle" font-size="12" fill="#334155">Campo Único: (COD_PRODUCTO)</text>
               </g>
 
               <!-- Left dims -->
@@ -632,17 +632,19 @@
   </div>
 
   <p class="muted" style="margin:10px 0 0;">
-    Datos listos para analítica que combinan múltiples dominios/fuentes con reglas estandarizadas.
+    Consolidados listos para analítica que combinan múltiples dominios/fuentes con reglas estandarizadas.
   </p>
 
   <div class="grid mt16">
+
+    <!-- Fila 1 -->
     <div class="card span-6">
       <div class="row" style="justify-content:space-between;">
         <strong>MasterAnalytics</strong>
         <span class="badge b-ok">Master</span>
       </div>
       <p class="muted">
-        Master consolidado para analítica que permite entender todas las aristas del cliente, y de los prospectos con información disponible.
+        Master consolidado para analítica que permite entender todas las aristas del cliente.
       </p>
     </div>
 
@@ -652,11 +654,35 @@
         <span class="badge b-ok">Master</span>
       </div>
       <p class="muted">
-        Master de átomos relacionales del cliente, consolida vínculos y relaciones familiares para análisis de redes, hogares y dependencia entre clientes.
+        Master relacional del cliente para análisis de vínculos y redes (se encuentra en construcción).
       </p>
     </div>
-  </div> <!-- cierre grid interno -->
-</div> <!-- cierre card Masters -->
+
+    <!-- Fila 2 -->
+    <div class="card span-6">
+      <div class="row" style="justify-content:space-between;">
+        <strong>MasterClientes</strong>
+        <span class="badge b-ok">Master</span>
+      </div>
+      <p class="muted">
+        Nace del MasterAnalytics, vista orientada a análisis de los clientes del banco.
+      </p>
+    </div>
+
+    <div class="card span-6">
+      <div class="row" style="justify-content:space-between;">
+        <strong>MasterEmpresas</strong>
+        <span class="badge b-ok">Master</span>
+      </div>
+      <p class="muted">
+        Nace del MasterAnalytics, vista orientada a análisis de clientes y personas jurídicas.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
 
 
 <!-- Modelos de datos -->
@@ -718,7 +744,7 @@
         <div class="row mt12">
           <a class="btn" href="https://bancopromericacr.sharepoint.com/:x:/r/sites/CientficosdeDatos/Shared%20Documents/Diccionario%20de%20Datos/Diccionario%20de%20Dimensiones%20y%20Hechos.xlsx?d=wed1b46b668e54cf28cdc85f80727e5c9&csf=1&web=1&e=LknKgP" target="_blank" rel="noopener">Diccionario Dimensiones y Hechos</a>
           <a class="btn" href="https://bancopromericacr.sharepoint.com/:x:/r/sites/CientficosdeDatos/Shared%20Documents/Diccionario%20de%20Datos/Diccionario%20de%20Variables%20Master%20Analytics.xlsx?d=w85b8370142e74032b95b6acddbacc32f&csf=1&web=1&e=zKK4Cc" target="_blank" rel="noopener">Diccionario de Masters</a>
-          <a class="btn" href="#" title="Link por definir">Diccionario de Modelos de Datos</a>
+          <a class="btn" href="https://bancopromericacr.sharepoint.com/:x:/r/sites/CientficosdeDatos/Shared%20Documents/Diccionario%20de%20Datos/Diccionario%20de%20Modelos%20de%20Datos.xlsx?d=w6965321b548e4041af49493826217f26&csf=1&web=1&e=S6HhAm" target="_blank" rel="noopener">Diccionario de Modelos de Datos</a>
         </div>
       </div>
     </section>    </section>
@@ -736,11 +762,58 @@
       </div>
 
       <div class="grid">
+
         <!-- Query 1 -->
         <div class="card span-12">
           <details open>
             <summary>
-              <span>Facturación de Tarjeta de Crédito</span>
+              <span>Información de Productos Pasivos y Activos</span>
+              <span class="chev">▾</span>
+            </summary>
+            <div class="acc-body">
+              <div class="codebox">
+                <div class="codebar">
+                  <div class="title">Power Query (M) · SQL Database (Gold)</div>
+                  <button class="copy" type="button" onclick="copyText('q_saldos')">Copiar query</button>
+                </div>
+                <pre id="q_saldos">let
+   Source = Sql.Database("synw-modeling-prod-westus2-001.sql.azuresynapse.net", "syndpmediospago", [Query="
+SELECT 
+      P.FEC_CORTE
+    , TP.TIPO_PRODUCTO
+    , M.DESCRIPCION_MONEDA
+    , COUNT(DISTINCT P.COD_CLIENTE) AS CLIENTES
+    , SUM(P.SALDO_PRODUCTO) AS SALDO_TOTAL
+
+FROM edw.FctProductos P
+
+LEFT JOIN edw.DimTipoProducto TP
+    ON P.COD_TIPO_PRODUCTO = TP.COD_TIPO_PRODUCTO
+
+LEFT JOIN edw.DimMoneda M
+    ON P.COD_MONEDA = M.COD_MONEDA
+
+WHERE P.FEC_CORTE = EOMONTH(GETDATE(), -1)
+    AND (P.COD_TIPO_PRODUCTO LIKE 'CE%' OR P.COD_TIPO_PRODUCTO LIKE 'CDI%'
+    OR P.COD_TIPO_PRODUCTO LIKE 'PR%' OR P.COD_TIPO_PRODUCTO LIKE 'TC%')
+
+GROUP BY
+      P.FEC_CORTE
+    , TP.TIPO_PRODUCTO
+    , M.DESCRIPCION_MONEDA
+in
+    Source</pre>
+              </div>
+            </div>
+          </details>
+        </div>
+
+
+        <!-- Query 2 -->
+        <div class="card span-12">
+          <details>
+            <summary>
+              <span>Facturación Tarjeta de Crédito</span>
               <span class="chev">▾</span>
             </summary>
             <div class="acc-body">
@@ -750,15 +823,15 @@
                   <button class="copy" type="button" onclick="copyText('q_fact_tc')">Copiar query</button>
                 </div>
                 <pre id="q_fact_tc">let
-   Source = Sql.Database("synw-modeling-prod-westus2-001-ondemand.sql.azuresynapse.net", "gold", [Query="SELECT 
+   Source = Sql.Database("synw-modeling-prod-westus2-001.sql.azuresynapse.net", "syndpmediospago", [Query="
+SELECT 
       F.FEC_CORTE
     , F.COD_INTERACCION
     , F.COD_TIPO_INTERACCION
     , F.COD_CLIENTE
     , F.COD_PRODUCTO
-    , F.COD_MONEDA
     , F.COD_ESTADO
-    , F.COD_INFO_INTERACCION
+    , M.DESCRIPCION_MONEDA
     , F.MONTO_INTERACCION
 
     -- Tipo Interacción
@@ -767,19 +840,16 @@
     , T.CATEGORIA_INTERACCION
     , T.SUBCATEGORIA_INTERACCION
 
-    -- Moneda
-    , M.DESCRIPCION_MONEDA
+FROM edw.FctInteracciones F
 
-FROM FctInteracciones F
-
-LEFT JOIN DimTipoInteraccion T
+LEFT JOIN edw.DimTipoInteraccion T
     ON F.COD_TIPO_INTERACCION = T.COD_TIPO_INTERACCION
   
-LEFT JOIN DimMoneda M
+LEFT JOIN edw.DimMoneda M
     ON F.COD_MONEDA = M.COD_MONEDA
 
 WHERE T.SUBCATEGORIA_INTERACCION = 'TC_COMPRAS_COMERCIO'
-  AND F.FEC_CORTE BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -2))
+    AND F.FEC_CORTE BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -2))
     AND EOMONTH(GETDATE(), -1)"])
 in
     Source</pre>
@@ -788,89 +858,99 @@ in
           </details>
         </div>
 
-        <!-- Placeholders (estructura lista) -->
+
+
+        <!-- Query 4 -->
         <div class="card span-12">
           <details>
             <summary>
-              <span>Receta (por completar) · Query 2</span>
+              <span>Consulta a Master Analytics</span>
               <span class="chev">▾</span>
             </summary>
             <div class="acc-body">
               <div class="codebox">
                 <div class="codebar">
-                  <div class="title">Plantilla</div>
-                  <button class="copy" type="button" onclick="copyText('q_tpl_2')">Copiar query</button>
-                </div>
-                <pre id="q_tpl_2">-- Objetivo:
--- Tabla(s) base:
--- Joins:
--- Filtros:
--- Campos de salida:
--- Notas:
-
-SELECT
-    -- ...
-FROM
-    -- ...</pre>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <div class="card span-12">
-          <details>
-            <summary>
-              <span>Receta (por completar) · Query 3</span>
-              <span class="chev">▾</span>
-            </summary>
-            <div class="acc-body">
-              <div class="codebox">
-                <div class="codebar">
-                  <div class="title">Plantilla</div>
+                  <div class="title">Power Query (M) · SQL Database (Gold)</div>
                   <button class="copy" type="button" onclick="copyText('q_tpl_3')">Copiar query</button>
                 </div>
-                <pre id="q_tpl_3">-- Objetivo:
--- Tabla(s) base:
--- Joins:
--- Filtros:
--- Campos de salida:
--- Notas:</n
+                <pre id="q_tpl_3">let
+   Source = Sql.Database("synw-modeling-prod-westus2-001.sql.azuresynapse.net", "syndpmediospago", [Query="
 SELECT
-    -- ...
-FROM
-    -- ...</pre>
+      FEC_CORTE
+    , COD_CLIENTE
+    , TIPO_CLIENTE
+    , SEGMENTACION_ESTRATEGICA
+    , NIVEL_PRINCIPALIDAD
+    , PRODUCTOS_CORE_Q_RANGO
+    , CE_SALDO
+    , CDI_SALDO
+    , CE_PLAN_METAS_SALDO
+    , TC_SALDO
+    , PR_PRENDARIO_SALDO
+    , PR_HIPOTECARIO_SALDO
+    , PR_OTROS_SALDO
+
+FROM edw.MasterAnalytics
+
+WHERE ESTADO_PERSONA = 'CLIENTE ACTIVO'
+
+in
+    Source</pre>
               </div>
             </div>
           </details>
         </div>
+      
 
+        <!-- Query 3 -->
         <div class="card span-12">
           <details>
             <summary>
-              <span>Receta (por completar) · Query 4</span>
+              <span>Interacciones de Pagos (Servicios / Proveedores)</span>
               <span class="chev">▾</span>
             </summary>
             <div class="acc-body">
               <div class="codebox">
                 <div class="codebar">
-                  <div class="title">Plantilla</div>
-                  <button class="copy" type="button" onclick="copyText('q_tpl_4')">Copiar query</button>
+                  <div class="title">Power Query (M) · SQL Database (Gold)</div>
+                  <button class="copy" type="button" onclick="copyText('q_tpl_2')">Copiar query</button>
                 </div>
-                <pre id="q_tpl_4">-- Objetivo:
--- Tabla(s) base:
--- Joins:
--- Filtros:
--- Campos de salida:
--- Notas:</n
-SELECT
-    -- ...
-FROM
-    -- ...</pre>
+                <pre id="q_tpl_2">let
+   Source = Sql.Database("synw-modeling-prod-westus2-001.sql.azuresynapse.net", "syndpmediospago", [Query="
+SELECT 
+      F.FEC_CORTE
+    , F.COD_INTERACCION
+    , F.COD_TIPO_INTERACCION
+    , F.COD_CLIENTE
+    , F.COD_PRODUCTO
+    , F.COD_ESTADO
+    , M.DESCRIPCION_MONEDA
+    , F.MONTO_INTERACCION
+
+    -- Tipo Interacción
+    , T.TIPO_INTERACCION
+    , T.SUBTIPO_INTERACCION
+    , T.CATEGORIA_INTERACCION
+    , T.SUBCATEGORIA_INTERACCION
+
+FROM edw.FctInteracciones F
+
+LEFT JOIN edw.DimTipoInteraccion T
+    ON F.COD_TIPO_INTERACCION = T.COD_TIPO_INTERACCION
+  
+LEFT JOIN edw.DimMoneda M
+    ON F.COD_MONEDA = M.COD_MONEDA
+
+WHERE T.CATEGORIA_INTERACCION = 'PAGOS'
+    AND F.FEC_CORTE BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -2))
+    AND EOMONTH(GETDATE(), -1)"])
+in
+    Source</pre>
               </div>
             </div>
           </details>
         </div>
-      </div>
+    </div>
 
       <footer>
         <p class="muted" style="margin:0;">Uso interno · Zona Gold · Infraestructura analítica</p>
@@ -917,3 +997,4 @@ FROM
   </script>
 </body>
 </html>
+
