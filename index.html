@@ -307,147 +307,260 @@
       </div>
 
       <div class="grid">
-        <!-- STAR: Interacciones (primero) -->
-        <div class="card span-12">
-          <div class="row" style="justify-content:space-between;">
-            <h3 class="tight">Modelo estrella · Interacciones</h3>
-            <span class="badge b-hecho">FctInteracciones</span>
-          </div>
-          <p class="muted">Nivel de detalle esperado: <strong>1 registro por interacción</strong> del cliente con el banco.</p>
-          <div class="diagram" role="img" aria-label="Diagrama estrella de FctInteracciones">
-            <svg viewBox="0 0 980 520" aria-hidden="false">
-              <!-- Links -->
-              <g stroke="#0a8f43" stroke-opacity=".55" stroke-width="3">
-                <line x1="490" y1="260" x2="170" y2="90" />
-                <line x1="490" y1="260" x2="170" y2="210" />
-                <line x1="490" y1="260" x2="170" y2="330" />
-                <line x1="490" y1="260" x2="170" y2="450" />
+       <!-- STAR: Interacciones (primero) -->
+<div class="card span-12">
+  <div class="row" style="justify-content:space-between;">
+    <h3 class="tight">Modelo estrella · Interacciones</h3>
+    <span class="badge b-hecho">FctInteracciones</span>
+  </div>
+  <p class="muted">Nivel de detalle esperado: <strong>1 registro por interacción</strong> del cliente con el banco.</p>
 
-                <line x1="490" y1="260" x2="820" y2="90" />
-                <line x1="490" y1="260" x2="820" y2="210" />
-                <line x1="490" y1="260" x2="820" y2="330" />
-                <line x1="490" y1="260" x2="820" y2="450" />
-              </g>
+  <div class="diagram" role="img" aria-label="Diagrama estrella de FctInteracciones">
+    <svg viewBox="0 0 980 600" aria-hidden="false">
+      <!-- Links -->
+      <g stroke="#0a8f43" stroke-opacity=".55" stroke-width="3">
+        <line x1="490" y1="260" x2="170" y2="90" />
+        <line x1="490" y1="260" x2="170" y2="210" />
+        <line x1="490" y1="260" x2="170" y2="330" />
+        <line x1="490" y1="260" x2="170" y2="450" />
 
-              <!-- Fact -->
-              <g class="node">
-                <rect x="360" y="215" width="260" height="90" rx="16" fill="#f1f5f9" stroke="#94a3b8" stroke-opacity=".55" />
-                <text x="490" y="255" text-anchor="middle" font-weight="900" fill="#0f172a">FctInteracciones</text>
-                <text x="490" y="278" text-anchor="middle" font-size="12" fill="#334155">Campo Único: COD_INTERACCION</text>
-              </g>
+        <line x1="490" y1="260" x2="820" y2="90" />
+        <line x1="490" y1="260" x2="820" y2="210" />
+        <line x1="490" y1="260" x2="820" y2="330" />
+        <line x1="490" y1="260" x2="820" y2="450" />
 
-              <!-- Left dims -->
-              <g class="node">
-                <rect x="70" y="55" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="92" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimTipoInteraccion</text>
-                <text x="170" y="112" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_TIPO_INTERACCION</text>
-              </g>
-              <g class="node">
-                <rect x="70" y="175" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="212" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCanal</text>
-                <text x="170" y="232" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_CANAL</text>
-              </g>
-              <g class="node">
-                <rect x="70" y="295" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="332" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimPais</text>
-                <text x="170" y="352" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PAIS</text>
-              </g>
-              <g class="node">
-                <rect x="70" y="415" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="452" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimProducto</text>
-                <text x="170" y="472" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PRODUCTO</text>
-              </g>
+        <!-- Bottom center (nuevo) -->
+        <line x1="490" y1="305" x2="490" y2="545" />
+      </g>
 
-              <!-- Right dims (mismo color) -->
-              <g class="node">
-                <rect x="720" y="55" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="92" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimComercio</text>
-                <text x="820" y="112" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_COMERCIO</text>
-              </g>
-              <g class="node">
-                <rect x="720" y="175" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="212" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimMoneda</text>
-                <text x="820" y="232" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_MONEDA</text>
-              </g>
-              <g class="node">
-                <rect x="720" y="295" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="332" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimEstado</text>
-                <text x="820" y="352" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_ESTADO</text>
-              </g>
-              <g class="node">
-                <rect x="720" y="415" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="452" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCalendario</text>
-                <text x="820" y="472" text-anchor="middle" font-size="12" fill="#1d4ed8">FEC_CORTE</text>
-              </g>
-            </svg>
-          </div>
-        </div>
+      <!-- Fact -->
+      <g class="node">
+        <rect x="360" y="215" width="260" height="90" rx="16" fill="#f1f5f9" stroke="#94a3b8" stroke-opacity=".55" />
+        <text x="490" y="255" text-anchor="middle" font-weight="900" fill="#0f172a">FctInteracciones</text>
+        <text x="490" y="278" text-anchor="middle" font-size="12" fill="#334155">Campo Único: COD_INTERACCION</text>
+      </g>
 
-        <!-- STAR: Productos -->
-        <div class="card span-12">
-          <div class="row" style="justify-content:space-between;">
-            <h3 class="tight">Modelo estrella · Productos</h3>
-            <span class="badge b-hecho">FctProductos</span>
-          </div>
-          <p class="muted">Nivel de detalle esperado: <strong>información a nivel de COD_PRODUCTO</strong> según la fecha de corte.</p>
-          <div class="diagram" role="img" aria-label="Diagrama estrella de FctProductos">
-            <svg viewBox="0 0 980 420" aria-hidden="false">
-              <!-- Links -->
-              <g stroke="#0a8f43" stroke-opacity=".55" stroke-width="3">
-                <line x1="490" y1="210" x2="170" y2="90" />
-                <line x1="490" y1="210" x2="170" y2="210" />
-                <line x1="490" y1="210" x2="170" y2="330" />
+      <!-- Left dims -->
+      <g class="node">
+        <rect x="70" y="55" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="92" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimTipoInteraccion</text>
+        <text x="170" y="112" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_TIPO_INTERACCION</text>
+      </g>
+      <g class="node">
+        <rect x="70" y="175" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="212" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCanal</text>
+        <text x="170" y="232" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_CANAL</text>
+      </g>
+      <g class="node">
+        <rect x="70" y="295" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="332" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimPais</text>
+        <text x="170" y="352" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PAIS</text>
+      </g>
+      <g class="node">
+        <rect x="70" y="415" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="452" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimProducto</text>
+        <text x="170" y="472" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PRODUCTO</text>
+      </g>
 
-                <line x1="490" y1="210" x2="820" y2="90" />
-                <line x1="490" y1="210" x2="820" y2="210" />
-                <line x1="490" y1="210" x2="820" y2="330" />
-              </g>
+      <!-- Right dims -->
+      <g class="node">
+        <rect x="720" y="55" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="820" y="92" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimComercio</text>
+        <text x="820" y="112" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_COMERCIO</text>
+      </g>
+      <g class="node">
+        <rect x="720" y="175" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="820" y="212" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimMoneda</text>
+        <text x="820" y="232" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_MONEDA</text>
+      </g>
+      <g class="node">
+        <rect x="720" y="295" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="820" y="332" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimEstado</text>
+        <text x="820" y="352" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_ESTADO</text>
+      </g>
+      <g class="node">
+        <rect x="720" y="415" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="820" y="452" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCalendario</text>
+        <text x="820" y="472" text-anchor="middle" font-size="12" fill="#1d4ed8">FEC_CORTE</text>
+      </g>
 
-              <!-- Fact -->
-              <g class="node">
-                <rect x="360" y="165" width="260" height="90" rx="16" fill="#f1f5f9" stroke="#94a3b8" stroke-opacity=".55" />
-                <text x="490" y="205" text-anchor="middle" font-weight="900" fill="#0f172a">FctProductos</text>
-                <text x="490" y="228" text-anchor="middle" font-size="12" fill="#334155">Campo Único: (COD_PRODUCTO)</text>
-              </g>
+      <!-- Bottom center: DimCliente -->
+      <g class="node">
+        <rect x="390" y="500" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="490" y="542" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCliente</text>
+        <text x="490" y="562" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_CLIENTE</text>
+      </g>
 
-              <!-- Left dims -->
-              <g class="node">
-                <rect x="70" y="55" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="92" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimProducto</text>
-                <text x="170" y="112" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PRODUCTO</text>
-              </g>
-              <g class="node">
-                <rect x="70" y="175" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="212" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimTipoProducto</text>
-                <text x="170" y="232" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_TIPO_PRODUCTO</text>
-              </g>
-              <g class="node">
-                <rect x="70" y="295" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="170" y="332" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimMoneda</text>
-                <text x="170" y="352" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_MONEDA</text>
-              </g>
+    </svg>
+  </div>
 
-              <!-- Right dims -->
-              <g class="node">
-                <rect x="720" y="55" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="92" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimEstado</text>
-                <text x="820" y="112" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_ESTADO</text>
-              </g>
-              <g class="node">
-                <rect x="720" y="175" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="212" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimPromotor</text>
-                <text x="820" y="232" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PROMOTOR</text>
-              </g>
-              <g class="node">
-                <rect x="720" y="295" width="200" height="70" rx="16" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
-                <text x="820" y="332" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCalendario</text>
-                <text x="820" y="352" text-anchor="middle" font-size="12" fill="#1d4ed8">FEC_CORTE</text>
-              </g>
-            </svg>
-          </div>
-        </div>
+  <!-- Medidas (FctInteracciones) -->
+  <div class="star-meta-grid">
+    <div class="star-meta-card">
+      <div class="star-meta-title">Medida:</div>
+      <div class="star-measures-row" aria-label="Medidas de FctInteracciones">
+        <span class="star-measure-chip">MONTO_INTERACCION</span>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
+
+        
+<!-- STAR: Productos -->
+<div class="card span-12">
+
+  <!-- Header -->
+  <div class="row" style="justify-content:space-between; align-items:center; gap:12px;">
+    <div>
+      <h3 class="tight" style="margin:0;">Modelo estrella · Productos</h3>
+      <p class="muted" style="margin:6px 0 0 0;">
+        Nivel de detalle esperado: <strong>información a nivel de COD_PRODUCTO</strong> según la fecha de corte.
+      </p>
+    </div>
+    <span class="badge b-hecho">FctProductos</span>
+  </div>
+
+  <!-- Scoped styles (solo para este bloque) -->
+  <!-- Scoped styles (solo para este bloque) -->
+<style>
+  .star-meta-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:12px;
+    margin-top:12px;
+  }
+  .star-meta-card{
+    background:#ffffff;
+    border:1px solid rgba(148,163,184,.45);
+    border-radius:14px;
+    padding:12px 14px;
+    box-shadow: 0 6px 50px rgba(15,23,42,.06);
+  }
+  .star-meta-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:0 0 10px 0;
+    font-weight:900;
+    color:#0f172a;
+    font-size:13px;
+  }
+
+  /* Medidas: una sola fila a lo largo del modelo */
+  .star-measures-row{
+    display:flex;
+    flex-wrap:nowrap;          /* una sola fila */
+    gap:10px;
+    overflow-x:auto;           /* si no cabe, scroll horizontal */
+    padding-bottom:6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .star-measures-row::-webkit-scrollbar{ height:8px; }
+  .star-measures-row::-webkit-scrollbar-thumb{
+    background: rgba(148,163,184,.55);
+    border-radius: 999px;
+  }
+
+  .star-measure-chip{
+    display:inline-flex;
+    align-items:center;
+    height:30px;
+    padding:0 12px;
+    border-radius:999px;
+    border:1px solid rgba(10,143,67,.35);
+    background: rgba(10,143,67,.08);
+    color:#0f172a;
+    font-size:12px;
+    font-weight:800;
+    white-space:nowrap;
+  }
+</style>
+
+  <!-- Diagrama (limpio) -->
+  <div class="diagram" role="img" aria-label="Diagrama estrella de FctProductos" style="margin-top:12px;">
+    <svg viewBox="0 0 980 460" aria-hidden="false">
+      <!-- Links -->
+      <g stroke="#0a8f43" stroke-opacity=".32" stroke-width="3">
+        <line x1="490" y1="210" x2="170" y2="90" />
+        <line x1="490" y1="210" x2="170" y2="210" />
+        <line x1="490" y1="210" x2="170" y2="330" />
+
+        <line x1="490" y1="210" x2="820" y2="90" />
+        <line x1="490" y1="210" x2="820" y2="210" />
+        <line x1="490" y1="210" x2="820" y2="330" />
+
+        <!-- Bottom center -->
+        <line x1="490" y1="255" x2="490" y2="380" />
+      </g>
+
+      <!-- Fact (solo esencial) -->
+      <g class="node">
+        <rect x="350" y="160" width="280" height="100" rx="18" fill="#f1f5f9" stroke="#94a3b8" stroke-opacity=".55" />
+        <text x="490" y="202" text-anchor="middle" font-weight="900" fill="#0f172a" font-size="18">FctProductos</text>
+        <text x="490" y="226" text-anchor="middle" font-size="12" fill="#475569">Grano: COD_PRODUCTO por FEC_CORTE</text>
+      </g>
+
+      <!-- Left dims -->
+      <g class="node">
+        <rect x="60" y="55" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="95" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimProducto</text>
+        <text x="170" y="118" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PRODUCTO</text>
+      </g>
+      <g class="node">
+        <rect x="60" y="175" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="215" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimTipoProducto</text>
+        <text x="170" y="238" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_TIPO_PRODUCTO</text>
+      </g>
+      <g class="node">
+        <rect x="60" y="295" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="170" y="335" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimMoneda</text>
+        <text x="170" y="358" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_MONEDA</text>
+      </g>
+
+      <!-- Right dims -->
+      <g class="node">
+        <rect x="700" y="55" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="810" y="95" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimEstado</text>
+        <text x="810" y="118" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_ESTADO</text>
+      </g>
+      <g class="node">
+        <rect x="700" y="175" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="810" y="215" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimPromotor</text>
+        <text x="810" y="238" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_PROMOTOR</text>
+      </g>
+      <g class="node">
+        <rect x="700" y="295" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+        <text x="810" y="335" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCalendario</text>
+        <text x="810" y="358" text-anchor="middle" font-size="12" fill="#1d4ed8">FEC_CORTE</text>
+      </g>
+	<!-- Bottom center -->
+	<line x1="490" y1="255" x2="490" y2="350" />
+
+	<!-- Bottom center dim (mismo tamaño que las otras) -->
+	<g class="node">
+  	<rect x="380" y="350" width="220" height="80" rx="18" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".25" />
+  	<text x="490" y="390" text-anchor="middle" font-weight="900" fill="#1d4ed8">DimCliente</text>
+  	<text x="490" y="413" text-anchor="middle" font-size="12" fill="#1d4ed8">COD_CLIENTE</text>
+	</g>
+    </svg>
+  </div>
+
+  <!-- Tarjetas de metadata -->
+<div class="star-meta-grid">
+  <div class="star-meta-card">
+    <div class="star-meta-title">Medidas</div>
+    <div class="star-measures-row" aria-label="Medidas de FctProductos">
+      <span class="star-measure-chip">SALDO_PRODUCTO</span>
+      <span class="star-measure-chip">MONTO_TRANSACCIONES</span>
+      <span class="star-measure-chip">CANTIDAD_TRANSACCIONES</span>
+      <span class="star-measure-chip">TASA_INTERES</span>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
 
     <!-- Tablas principales -->
     <section id="tablas" class="section" aria-label="Tablas de Gold">
